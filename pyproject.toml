@@ -6,6 +6,9 @@ authors = ["Sara <sarabouaz@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
+sqlalchemy = "^1.2"
+flask_sqlalchemy = "^2.3"
+flask_marshmallow = "^0.9.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
