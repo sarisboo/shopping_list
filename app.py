@@ -2,13 +2,12 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Table, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
 from flask_marshmallow import Marshmallow
+import os
 
-
-Base = declarative_base()
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///shopping_list_v1.db"
+app.config.from_object("config")
+
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
@@ -36,7 +35,6 @@ class Ingredient(db.Model):
 
 
 class RecipeIngredients(db.Model):
-
     __tablename__ = "recipes_ingredients"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -50,7 +48,7 @@ class RecipeSchema(ma.Schema):
         fields = ("name", "rating", "total_time")
 
 
-recipe_schema = RecipeSchema(many=True)
+recipe_schema = RecipeSchema(many=True, strict=True)
 
 # endpoint to get recipe detail by id
 @app.route("/recipes/weekly_suggesions", methods=["GET"])
@@ -59,5 +57,9 @@ def recipe_detail():
     return recipe_schema.jsonify(recipes)
 
 
+def run():
+    app.run()
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    run()

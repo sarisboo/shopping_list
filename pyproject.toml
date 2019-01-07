@@ -8,7 +8,9 @@ authors = ["Sara <sarabouaz@gmail.com>"]
 python = "^3.6"
 sqlalchemy = "^1.2"
 flask_sqlalchemy = "^2.3"
-flask_marshmallow = "^0.9.0"
+flask = "^1.0"
+flask-marshmallow = "^0.9.0"
+marshmallow-sqlalchemy = "^0.15.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
